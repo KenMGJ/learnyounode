@@ -1,4 +1,4 @@
 learnyounode
 ============
 
-My solutions to the learnyounode exercise
+My solutions to the learnyounode exercises
