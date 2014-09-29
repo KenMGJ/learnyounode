@@ -1,0 +1,13 @@
+{
+  "name": "learnyounode",
+  "version": "0.11.0",
+  "description": "My solutions to the learnyounode exercises",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:KenMGJ/learnyounode.git"
+  },
+  "author": "Ken Giroux",
+  "devDependencies": {
+    "strftime": "~0.8.2"
+  }
+}
