@@ -1,13 +1,6 @@
 var http = require('http');
 var url = require('url');
 
-var time_parser = function(query) {
-	if (!query.hasOwnProperty('iso')) {
-		return 'Invalid Request';
-	}
-	return 'VALID';
-}
-
 var server = http.createServer(function(req, resp) {
 	if (req.method != 'GET') {
 		return res.end('Invalid Request');
@@ -15,8 +8,27 @@ var server = http.createServer(function(req, resp) {
 
 	var req_url = url.parse(req.url, true);
 
-	if (req_url.pathname === '/parsetime' || req_url.pathname === '/unixtime') {
-		resp.end(time_parser(req_url.query));
+	if (req_url.pathname === '/api/parsetime') {
+		resp.writeHead(200, { 'Content-Type': 'application/json' });
+
+		var d = new Date(req_url.query.iso);
+		var ret = {
+			hour: d.getHours(),
+			minute: d.getMinutes(),
+			second: d.getSeconds()
+		};
+
+		resp.end(JSON.stringify(ret));
+	}
+	else if (req_url.pathname === '/api/unixtime') {
+		resp.writeHead(200, { 'Content-Type': 'application/json' });
+
+		var d = new Date(req_url.query.iso);
+		var ret = {
+			unixtime: Math.floor(d.getTime())
+		};
+
+		resp.end(JSON.stringify(ret));
 	}
 	else {
 		return resp.end('Invalid Request');
